@@ -93,16 +93,28 @@
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-
   body {
     @apply bg-background text-foreground;
-    background-image: url("https://cdn.builder.io/api/v1/image/assets%2Fdfdcf4d158f74041bbe40315e95160a1%2Fff3bed0284b44d3f86dbce949f7e5f1f?format=webp&width=1600");
+    /* We move the background properties to the pseudo-element below */
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; /* Or absolute, depending on scroll behavior */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* Pushes it behind all content */
+
+    background-image: url("./assets/bg1.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+
+    /* This will now ONLY blur the background */
+    filter: blur(4px); 
   }
 }
+

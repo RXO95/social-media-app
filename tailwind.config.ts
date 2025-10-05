@@ -67,6 +67,15 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        sunshines: { // Add this
+          "0%": { transform: "scale(1)", opacity: "0.6" },
+          "100%": { transform: "scale(1.4)", opacity: "0" },
+        },
+        clouds: { // Add this
+          "0%": { transform: "translateX(15px)" },
+          "50%": { transform: "translateX(0px)" },
+          "100%": { transform: "translateX(15px)" },
+        },
         "accordion-down": {
           from: {
             height: "0",
@@ -87,6 +96,9 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        sunshines: "sunshines 2s infinite", // Add this
+        clouds: "clouds 8s infinite ease-in-out", // Add this
+        "clouds-slow": "clouds 12s infinite ease-in-out",
       },
     },
   },

@@ -16,90 +16,92 @@ import {
   CheckCircle
 } from "lucide-react";
 import { useState } from "react";
-
+import WeatherWidget from "@/components/WeatherWidget";
 export default function Index() {
   const [postText, setPostText] = useState("");
 
   return (
-    <div className="min-h-screen bg-[#1a1625] relative overflow-hidden">
-      {/* Background gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#34284966] via-[#726a8114] to-[#ffffff05] backdrop-blur-[7.5px]" />
+    // Removed the opaque bg-color to allow global background image to show
+    <div className="min-h-screen relative overflow-hidden">
       
-      {/* Main container */}
-      <div className="relative flex min-h-screen max-w-[1440px] mx-auto">
-        {/* Left Sidebar */}
-        <aside className="w-64 border-r border-white/10 bg-white/5 backdrop-blur-lg flex flex-col">
-          {/* Logo */}
-          <div className="h-[81px] flex items-center px-6">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
-                <Zap className="w-3.5 h-3.5 text-white fill-white" />
+      {/* Main container: Adjusted for sticky sidebars */}
+      <div className="relative flex max-w-[1440px] mx-auto h-screen">
+
+        {/* Left Sidebar: Made sticky */}
+        <aside className="w-64 flex flex-col sticky top-0 h-screen">
+          <div className="flex-1 border-r border-white/10 bg-white/5 backdrop-blur-lg flex flex-col">
+            {/* Logo */}
+            <div className="h-[81px] flex items-center px-6 shrink-0">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
+                  <Zap className="w-3.5 h-3.5 text-white fill-white" />
+                </div>
+                <span className="text-white font-bold text-xl">Skill Issue</span>
               </div>
-              <span className="text-white font-bold text-xl">Skill Issue</span>
             </div>
-          </div>
 
-          {/* Navigation */}
-          <nav className="flex-1 px-4 py-4">
-            <ul className="space-y-2">
-              <li>
-                <button className="w-full flex items-center gap-2 px-4 py-3 rounded-xl bg-blue-500/20 text-blue-500 hover:bg-blue-500/30 transition-colors">
-                  <Home className="w-5 h-5 fill-blue-500" />
-                  <span className="font-medium">Home</span>
-                </button>
-              </li>
-              <li>
-                <button className="w-full flex items-center gap-2 px-4 py-3 rounded-xl text-gray-400 hover:bg-white/5 transition-colors">
-                  <Search className="w-[18px] h-[18px]" />
-                  <span className="font-medium">Search</span>
-                </button>
-              </li>
-              <li>
-                <button className="w-full flex items-center gap-2 px-4 py-3 rounded-xl text-gray-400 hover:bg-white/5 transition-colors">
-                  <Bell className="w-4 h-4" />
-                  <span className="font-medium">Notifications</span>
-                </button>
-              </li>
-              <li>
-                <button className="w-full flex items-center gap-2 px-4 py-3 rounded-xl text-gray-400 hover:bg-white/5 transition-colors">
-                  <User className="w-4 h-4" />
-                  <span className="font-medium">Profile</span>
-                </button>
-              </li>
-            </ul>
-          </nav>
+            {/* Navigation */}
+            <nav className="flex-1 px-4 py-4">
+              <ul className="space-y-2">
+                <li>
+                  <button className="w-full flex items-center gap-2 px-4 py-3 rounded-xl bg-blue-500/20 text-blue-500 hover:bg-blue-500/30 transition-colors">
+                    <Home className="w-5 h-5 fill-blue-500" />
+                    <span className="font-medium">Home</span>
+                  </button>
+                </li>
+                <li>
+                  <button className="w-full flex items-center gap-2 px-4 py-3 rounded-xl text-gray-400 hover:bg-white/5 transition-colors">
+                    <Search className="w-[18px] h-[18px]" />
+                    <span className="font-medium">Search</span>
+                  </button>
+                </li>
+                <li>
+                  <button className="w-full flex items-center gap-2 px-4 py-3 rounded-xl text-gray-400 hover:bg-white/5 transition-colors">
+                    <Bell className="w-4 h-4" />
+                    <span className="font-medium">Notifications</span>
+                  </button>
+                </li>
+                <li>
+                  <button className="w-full flex items-center gap-2 px-4 py-3 rounded-xl text-gray-400 hover:bg-white/5 transition-colors">
+                    <User className="w-4 h-4" />
+                    <span className="font-medium">Profile</span>
+                  </button>
+                </li>
+              </ul>
+            </nav>
 
-          {/* New Post Button */}
-          <div className="p-4">
-            <button className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-xl flex items-center justify-center gap-2 transition-colors">
-              <Plus className="w-3.5 h-3.5" />
-              New Post
-            </button>
-          </div>
-
-          {/* User Profile */}
-          <div className="p-4 border-t border-gray-700/50">
-            <div className="flex items-center gap-3">
-              <img 
-                src="https://api.builder.io/api/v1/image/assets/TEMP/e67f24574a7de6712690255f492a9f152a23d1fe?width=80" 
-                alt="Sarah Johnson" 
-                className="w-10 h-10 rounded-full"
-              />
-              <div className="flex-1">
-                <div className="text-white font-medium">Sarah Johnson</div>
-                <div className="text-gray-500 text-sm">@sarahjohnson</div>
-              </div>
-              <button className="text-gray-400 hover:text-white">
-                <MoreHorizontal className="w-3.5 h-3.5" />
+            {/* New Post Button */}
+            <div className="p-4 shrink-0">
+              <button className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-xl flex items-center justify-center gap-2 transition-colors">
+                <Plus className="w-3.5 h-3.5" />
+                New Post
               </button>
+            </div>
+
+            {/* User Profile */}
+            <div className="p-4 border-t border-gray-700/50 shrink-0">
+              <div className="flex items-center gap-3">
+                <img 
+                  src="https://api.builder.io/api/v1/image/assets/TEMP/e67f24574a7de6712690255f492a9f152a23d1fe?width=80" 
+                  alt="Sarah Johnson" 
+                  className="w-10 h-10 rounded-full"
+                />
+                <div className="flex-1">
+                  <div className="text-white font-medium">Sarah Johnson</div>
+                  <div className="text-gray-500 text-sm">@sarahjohnson</div>
+                </div>
+                <button className="text-gray-400 hover:text-white">
+                  <MoreHorizontal className="w-3.5 h-3.5" />
+                </button>
+              </div>
             </div>
           </div>
         </aside>
 
-        {/* Main Content */}
-        <main className="flex-1 max-w-[864px] border-r border-gray-700/50">
+        {/* Main Content: Made scrollable */}
+        <main className="flex-1 max-w-[864px] border-r border-gray-700/50 overflow-y-auto">
           {/* Header */}
-          <header className="h-[81px] px-6 flex items-center border-b border-gray-700/50">
+          <header className="h-[81px] px-6 flex items-center border-b border-gray-700/50 sticky top-0 bg-black/30 backdrop-blur-lg z-10">
             <h2 className="text-white text-2xl font-bold">Home</h2>
           </header>
 
@@ -116,7 +118,7 @@ export default function Index() {
                   placeholder="What's happening?"
                   value={postText}
                   onChange={(e) => setPostText(e.target.value)}
-                  className="w-full bg-white/6 backdrop-blur-lg border border-white/20 rounded-[15px] px-4 py-4 text-white placeholder-gray-400 resize-none focus:outline-none focus:ring-1 focus:ring-white/10 min-h-[118px]"
+                  className="w-full bg-white/5 backdrop-blur-lg border border-white/20 rounded-[15px] px-4 py-4 text-white placeholder-gray-400 resize-none focus:outline-none focus:ring-1 focus:ring-white/10 min-h-[118px]"
                 />
                 <div className="flex items-center justify-between mt-6">
                   <div className="flex gap-4">
@@ -139,9 +141,9 @@ export default function Index() {
           </div>
 
           {/* Feed */}
-          <div className="space-y-0">
+          <div className="space-y-4 p-6">
             {/* Post 1 */}
-            <article className="px-6 py-6 mb-4 rounded-[15px] border border-white/10 bg-white/5 backdrop-blur-lg shadow-[0_8px_32px_rgba(2,6,23,0.6)]">
+            <article className="px-6 py-6 rounded-[15px] border border-white/10 bg-white/5 backdrop-blur-lg shadow-lg">
               <div className="flex gap-4">
                 <img 
                   src="https://api.builder.io/api/v1/image/assets/TEMP/32cb5326c329b8156f2567ef2c49ba2e743d666a?width=96" 
@@ -181,7 +183,7 @@ export default function Index() {
             </article>
 
             {/* Post 2 with Image */}
-            <article className="px-6 py-6 mb-4 rounded-[15px] border border-white/10 bg-white/5 backdrop-blur-lg shadow-[0_8px_32px_rgba(2,6,23,0.6)]">
+            <article className="px-6 py-6 rounded-[15px] border border-white/10 bg-white/5 backdrop-blur-lg shadow-lg">
               <div className="flex gap-4">
                 <img 
                   src="https://api.builder.io/api/v1/image/assets/TEMP/43cb8c73a768732869b5fb7218e17933088e7ba2?width=96" 
@@ -202,7 +204,7 @@ export default function Index() {
                     <img 
                       src="https://api.builder.io/api/v1/image/assets/TEMP/10870918561dfb0132ed95a453b3da45f48ceae1?width=1502" 
                       alt="Sunrise" 
-                      className="w-full h-64 object-cover"
+                      className="w-full h-auto object-cover"
                     />
                   </div>
                   <div className="flex items-center gap-20">
@@ -227,7 +229,7 @@ export default function Index() {
             </article>
 
             {/* Post 3 */}
-            <article className="px-6 py-6 mb-4 rounded-[15px] border border-white/10 bg-white/5 backdrop-blur-lg shadow-[0_8px_32px_rgba(2,6,23,0.6)]">
+            <article className="px-6 py-6 rounded-[15px] border border-white/10 bg-white/5 backdrop-blur-lg shadow-lg">
               <div className="flex gap-4">
                 <img 
                   src="https://api.builder.io/api/v1/image/assets/TEMP/9b73dde4179c8b8c24f161a24f19390b3aff500e?width=96" 
@@ -267,15 +269,15 @@ export default function Index() {
           </div>
         </main>
 
-        {/* Right Sidebar */}
-        <aside className="w-80 p-6 space-y-6 hidden lg:block">
+        {/* Right Sidebar: Made sticky */}
+        <aside className="w-80 p-6 space-y-6 hidden lg:block sticky top-0 h-screen overflow-y-auto">
           {/* Search */}
           <div className="relative">
             <Search className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" />
             <input 
               type="text" 
               placeholder="Search SocialX"
-              className="w-full bg-white/10 border border-gray-700 rounded-full py-3 pl-12 pr-4 text-white placeholder-gray-400 focus:outline-none focus:border-gray-600"
+              className="w-full bg-white/10 border border-gray-700 rounded-full py-3 pl-12 pr-4 text-white placeholder-gray-400 focus:outline-none focus:border-gray-600 backdrop-blur-lg"
             />
           </div>
 
@@ -321,7 +323,7 @@ export default function Index() {
                   <div className="text-white font-semibold">David Kim</div>
                   <div className="text-gray-500 text-sm">@davidkim</div>
                 </div>
-                <button className="bg-gray-900 hover:bg-gray-800 text-white font-semibold px-4 py-1.5 rounded-full text-sm transition-colors">
+                <button className="bg-white hover:bg-gray-200 text-black font-semibold px-4 py-1.5 rounded-full text-sm transition-colors">
                   Follow
                 </button>
               </div>
@@ -335,7 +337,7 @@ export default function Index() {
                   <div className="text-white font-semibold">Lisa Zhang</div>
                   <div className="text-gray-500 text-sm">@lisazhang</div>
                 </div>
-                <button className="bg-gray-900 hover:bg-gray-800 text-white font-semibold px-4 py-1.5 rounded-full text-sm transition-colors">
+                <button className="bg-white hover:bg-gray-200 text-black font-semibold px-4 py-1.5 rounded-full text-sm transition-colors">
                   Follow
                 </button>
               </div>
@@ -349,7 +351,7 @@ export default function Index() {
                   <div className="text-white font-semibold">Ryan Martinez</div>
                   <div className="text-gray-500 text-sm">@ryanmartinez</div>
                 </div>
-                <button className="bg-gray-900 hover:bg-gray-800 text-white font-semibold px-4 py-1.5 rounded-full text-sm transition-colors">
+                <button className="bg-white hover:bg-gray-200 text-black font-semibold px-4 py-1.5 rounded-full text-sm transition-colors">
                   Follow
                 </button>
               </div>
@@ -358,34 +360,7 @@ export default function Index() {
           </div>
 
           {/* Weather Widget */}
-          <div className="rounded-[23px] bg-gradient-to-br from-yellow-100/50 via-transparent to-transparent p-6 shadow-lg relative overflow-hidden">
-            <div className="relative z-10">
-              <div className="text-white/70 font-bold text-[15px]">Bangalore, Karnataka</div>
-              <div className="text-white/50 text-[15px] font-semibold mt-1">Oct 4th</div>
-              
-              {/* Weather Icon */}
-              <div className="absolute right-0 top-0 w-44 h-44">
-                {/* Sun */}
-                <div className="absolute left-9 top-9 w-[120px] h-[120px] rounded-full bg-gradient-to-r from-[#FCBB04] to-[#FFFC00]" />
-                <div className="absolute left-9 top-9 w-[119px] h-[119px] rounded-full bg-gradient-to-r from-[#FCBB04] to-[#FFFC00] opacity-20" />
-                
-                {/* Clouds */}
-                <div className="absolute left-5 top-12">
-                  <div className="w-16 h-16 bg-[#4C9BEB] rounded-[23px] rounded-tr-[23px] rounded-br-none rounded-bl-[23px]" />
-                  <div className="absolute left-8 top-3.5 w-11 h-11 bg-[#4C9BEB] rounded-[16px] rounded-tr-[16px] rounded-br-[16px] rounded-bl-none" />
-                </div>
-                <div className="absolute right-0 top-14">
-                  <div className="w-[30px] h-[30px] bg-[#4C9BEB] rounded-[11px] rounded-tr-[11px] rounded-br-none rounded-bl-[11px]" />
-                  <div className="absolute left-2.5 -top-3.5 w-[50px] h-[50px] bg-[#4C9BEB] rounded-[18px] rounded-tr-[18px] rounded-br-[18px] rounded-bl-none" />
-                </div>
-              </div>
-
-              <div className="text-white text-[64px] font-semibold leading-none mt-16">23°</div>
-              <div className="inline-block mt-6 bg-black/10 rounded-lg px-[18px] py-2">
-                <span className="text-white/70 text-[13px] font-bold">Celcius</span>
-              </div>
-            </div>
-          </div>
+          <WeatherWidget />
         </aside>
       </div>
     </div>

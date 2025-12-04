@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import logo from "../assets/stellar-logo.png"; 
+
 
 export default function Sidebar() {
   const { user, loading, login, logout } = useAuth();
@@ -15,31 +17,33 @@ export default function Sidebar() {
   return (
     <aside className="stellar-sidebar">
       <div>
+        {/* LOGO */}
         <div className="stellar-logo">
-          <div className="stellar-logo-icon" />
+          <img
+            src={logo}
+            alt="Stellar logo"
+            className="stellar-logo-img"
+          />
           <span>STELLAR</span>
         </div>
 
         <nav className="stellar-nav">
           <Link to="/" className="stellar-nav-item stellar-nav-primary">
-            <span className="stellar-nav-icon">🏠</span>
             <span>Home</span>
           </Link>
           <Link to="/profile" className="stellar-nav-item">
-            <span className="stellar-nav-icon">👤</span>
             <span>Profile</span>
           </Link>
           <button className="stellar-nav-item" type="button">
-            <span className="stellar-nav-icon">🔔</span>
             <span>Notifications</span>
           </button>
           <button className="stellar-nav-item" type="button">
-            <span className="stellar-nav-icon">🔎</span>
             <span>Explore</span>
           </button>
         </nav>
       </div>
 
+      {/* footer stays same... */}
       <div className="stellar-sidebar-footer">
         {loading ? (
           <span>Loading…</span>

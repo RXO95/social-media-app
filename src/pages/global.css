@@ -1,0 +1,503 @@
+/* ---- Reset & base ---- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #1d2440 0, #020617 55%, #000 100%);
+  color: #f9fafb;
+}
+
+/* ---- Stellar background & glass shell ---- */
+
+.stellar-bg {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* Soft glowing nebula background */
+.stellar-bg::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  /* Your custom background image */
+  background-image: url("../assets/bg1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* Optional dimming + blending */
+  opacity: 1;
+  filter: blur(5px) brightness(1.5);
+
+  /* Keep behind everything */
+  z-index: -2;
+}
+
+/* If you want to use your own bg image instead, uncomment & adjust:
+.stellar-bg::before {
+  background-image: url("/src/assets/bg1.jpg");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.38;
+  filter: blur(18px);
+}
+*/
+.stellar-post-avatar {
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.45);
+}
+
+.stellar-shell {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 16px 16px 24px;
+  display: flex;
+  gap: 16px;
+}
+
+/* ---- Columns ---- */
+
+.stellar-sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 24px;
+  padding: 16px 14px 14px;
+  backdrop-filter: blur(28px);
+  background: linear-gradient(
+    145deg,
+    rgba(15, 23, 42, 0.96),
+    rgba(15, 23, 42, 0.8)
+  );
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  box-shadow:
+    0 20px 45px rgba(15, 23, 42, 0.9),
+    0 0 0 1px rgba(15, 23, 42, 0.9);
+}
+
+.stellar-main {
+  flex: 1;
+  min-width: 0;
+  border-radius: 24px;
+  backdrop-filter: blur(26px);
+  background:
+    radial-gradient(circle at top, rgba(37, 99, 235, 0.18), transparent 55%),
+    rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow:
+    0 24px 60px rgba(15, 23, 42, 0.85),
+    0 0 0 1px rgba(15, 23, 42, 0.9);
+}
+
+.stellar-right {
+  width: 280px;
+  flex-shrink: 0;
+  border-radius: 24px;
+  padding: 16px;
+  backdrop-filter: blur(30px);
+  background: linear-gradient(
+    150deg,
+    rgba(15, 23, 42, 0.97),
+    rgba(15, 23, 42, 0.85)
+  );
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  box-shadow:
+    0 20px 45px rgba(15, 23, 42, 0.9),
+    0 0 0 1px rgba(15, 23, 42, 0.9);
+}
+
+/* ---- Header ---- */
+
+.stellar-header {
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.24);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  backdrop-filter: blur(20px);
+  background: linear-gradient(
+    to bottom,
+    rgba(15, 23, 42, 0.86),
+    rgba(15, 23, 42, 0.78)
+  );
+}
+
+/* ---- Sidebar ---- */
+
+.stellar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #e0f2fe;
+}
+.stellar-logo-img {
+  width: 36px;
+  height: 36px;
+  border-radius: 14px;
+  padding: 4px;
+
+  /* subtle dark backing so the logo pops */
+  background: radial-gradient(circle at 30% 20%, #0f172a, #020617);
+
+  /* neon-ish glow */
+  box-shadow:
+    0 0 10px rgba(56, 189, 248, 0.7),
+    0 0 22px rgba(96, 165, 250, 0.6),
+    0 0 36px rgba(37, 99, 235, 0.5);
+}
+
+/* optional: gentle breathing animation */
+@keyframes stellar-logo-glow {
+  0% {
+    box-shadow:
+      0 0 8px rgba(56, 189, 248, 0.55),
+      0 0 18px rgba(96, 165, 250, 0.45);
+    transform: translateY(0);
+  }
+  100% {
+    box-shadow:
+      0 0 14px rgba(56, 189, 248, 0.9),
+      0 0 26px rgba(96, 165, 250, 0.8);
+    transform: translateY(-0.5px);
+  }
+}
+
+.stellar-logo-img {
+  animation: stellar-logo-glow 3s ease-in-out infinite alternate;
+}
+
+.stellar-logo-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 20%, #e5e7eb, #38bdf8);
+  box-shadow: 0 0 26px rgba(56, 189, 248, 0.95);
+}
+
+.stellar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 22px;
+}
+
+.stellar-nav-item {
+  border-radius: 999px;
+  padding: 9px 13px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  font-size: 14px;
+  background: transparent;
+  color: #e5e7eb;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.18s ease, transform 0.12s ease, color 0.18s ease;
+}
+
+.stellar-nav-item span.stellar-nav-icon {
+  font-size: 17px;
+}
+
+.stellar-nav-item:hover {
+  background: rgba(15, 23, 42, 0.92);
+  transform: translateY(-1px);
+}
+
+.stellar-nav-primary {
+  background: rgba(37, 99, 235, 0.2);
+  color: #bfdbfe;
+}
+
+.stellar-nav-primary:hover {
+  background: rgba(37, 99, 235, 0.32);
+}
+
+/* Auth / profile summary in sidebar */
+.stellar-sidebar-footer {
+  margin-top: auto;
+  font-size: 12px;
+  color: #9ca3af;
+  padding-top: 14px;
+  border-top: 1px solid rgba(15, 23, 42, 0.9);
+}
+
+/* ---- Composer ---- */
+
+.stellar-composer {
+  padding: 14px 20px 12px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.24);
+}
+
+.stellar-composer-inner {
+  display: flex;
+  gap: 14px;
+}
+
+.stellar-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 20%, #e5e7eb, #38bdf8);
+  flex-shrink: 0;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+}
+
+.stellar-textarea {
+  width: 100%;
+  min-height: 72px;
+  border-radius: 18px;
+  padding: 10px 12px;
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  background: rgba(15, 23, 42, 0.8);
+  color: #f9fafb;
+  font-size: 14px;
+  resize: none;
+  outline: none;
+}
+
+.stellar-textarea::placeholder {
+  color: #9ca3af;
+}
+
+.stellar-composer-footer {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ---- Feed ---- */
+
+.stellar-feed {
+  padding: 6px 0 16px;
+  overflow-y: auto;
+}
+
+.stellar-post {
+  padding: 8px 20px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.93);
+}
+
+.stellar-post-card {
+  border-radius: 18px;
+  padding: 10px 12px;
+  background: linear-gradient(
+    145deg,
+    rgba(15, 23, 42, 0.98),
+    rgba(15, 23, 42, 0.82)
+  );
+  border: 1px solid rgba(148, 163, 184, 0.36);
+  transition: transform 0.12s ease, box-shadow 0.12s ease,
+    border-color 0.16s ease;
+}
+
+.stellar-post-card:hover {
+  transform: translateY(-1px);
+  border-color: rgba(191, 219, 254, 0.7);
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.9);
+}
+
+.stellar-post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.stellar-post-header-left {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.stellar-post-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  flex-shrink: 0;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(148, 163, 184, 0.65);
+}
+
+.stellar-post-author {
+  font-size: 14px;
+  font-weight: 600;
+  color: #e5e7eb;
+}
+
+.stellar-post-handle {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.stellar-post-time {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.stellar-post-content {
+  font-size: 14px;
+  color: #e5e7eb;
+  white-space: pre-wrap;
+  margin-top: 4px;
+}
+
+/* ---- Right sidebar ---- */
+
+.stellar-right-section-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.stellar-right-card {
+  margin-top: 8px;
+  padding: 10px 12px;
+  border-radius: 18px;
+  background: rgba(15, 23, 42, 0.96);
+  border: 1px solid rgba(148, 163, 184, 0.26);
+  font-size: 13px;
+  color: #d1d5db;
+}
+
+/* Search */
+.stellar-right-search {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.stellar-right-search input {
+  width: 100%;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: rgba(15, 23, 42, 0.96);
+  padding: 9px 12px 9px 30px;
+  color: #e5e7eb;
+  font-size: 13px;
+  outline: none;
+}
+
+.stellar-right-search input::placeholder {
+  color: #9ca3af;
+}
+
+.stellar-right-search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+/* Trends list */
+.stellar-trend-item {
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.9);
+}
+
+.stellar-trend-item:last-child {
+  border-bottom: none;
+}
+
+.stellar-trend-topic {
+  font-size: 13px;
+  font-weight: 500;
+  color: #e5e7eb;
+}
+
+.stellar-trend-meta {
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+/* Who to follow */
+.stellar-follow-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+}
+
+.stellar-follow-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 20%, #e5e7eb, #38bdf8);
+}
+
+.stellar-follow-name {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.stellar-follow-handle {
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.stellar-follow-button {
+  margin-left: auto;
+  border-radius: 999px;
+  padding: 5px 10px;
+  border: none;
+  font-size: 11px;
+  background: rgba(37, 99, 235, 0.9);
+  color: white;
+  cursor: pointer;
+}
+
+/* ---- Responsive tweaks ---- */
+
+@media (max-width: 1024px) {
+  .stellar-right {
+    display: none;
+  }
+
+  .stellar-shell {
+    max-width: 900px;
+  }
+}
+
+@media (max-width: 768px) {
+  .stellar-sidebar {
+    display: none;
+  }
+
+  .stellar-shell {
+    max-width: 640px;
+    padding-inline: 10px;
+  }
+
+  .stellar-main {
+    border-radius: 18px;
+  }
+}

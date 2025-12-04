@@ -1,73 +1,127 @@
-# React + TypeScript + Vite
+Stellar – A Modern Twitter-Like Social Platform
+<p align="center"> <img src="./screenshots/stellar-logo.png" alt="Stellar Logo" width="120"/> </p>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Stellar is a lightweight, modern social media web application inspired by Twitter.
+It is built using React and Vite, styled with a glassmorphism interface, and powered by Firebase (Authentication, Firestore, and Storage).
 
-Currently, two official plugins are available:
+The platform allows users to:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Post text updates
 
-## React Compiler
+Like and delete posts
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Sign in with Google
 
-## Expanding the ESLint configuration
+Experience a visually appealing, glass-based UI
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+(Upcoming) Upload images, comment on posts, and more
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Preview
+<p align="center"> <img src="./screenshots/screenshot1.png" alt="Stellar App Screenshot" width="700"/> </p>
+Features
+Google Authentication
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Secure sign-in using Firebase Authentication.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Create Posts
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+A smooth and minimal composer to share updates.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Like Posts
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Interactive liking system synchronized through Firestore.
+
+Delete Posts
+
+Users can remove their own posts, updated in real time.
+
+Demo Posts
+
+Default posts are shown when no real posts exist to keep the feed populated.
+
+Glassmorphism UI
+
+A clean, modern interface with translucent components and soft highlights.
+
+Real-Time Updates
+
+Firestore provides instant synchronization across devices.
+
+Tech Stack
+Technology	Purpose
+React + Vite	Frontend framework and development environment
+Firebase Authentication	User sign-in with Google
+Firestore	Real-time database for posts
+Firebase Storage	(Upcoming) Image uploads
+TailwindCSS	Styling and UI utilities
+Custom Glassmorphism Theme	Visual design layer
+Getting Started
+1. Clone the Repository
+git clone https://github.com/YOUR-USERNAME/stellar.git
+cd stellar
+
+2. Install Dependencies
+npm install
+
+3. Add Firebase Configuration
+
+Create:
+
+src/firebase.ts
+
+
+Add:
+
+import { initializeApp } from "firebase/app";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+
+const firebaseConfig = {
+  // your config here
+};
+
+const app = initializeApp(firebaseConfig);
+
+export const auth = getAuth(app);
+export const provider = new GoogleAuthProvider();
+export const db = getFirestore(app);
+
+4. Run Development Server
+npm run dev
+
+Project Structure
+stellar/
+ ├── src/
+ │   ├── assets/          → Logo and visuals
+ │   ├── components/      → Sidebar, Composer, PostCard, etc.
+ │   ├── contexts/        → Authentication context
+ │   ├── pages/           → Home, Profile, NotFound
+ │   ├── firebase.ts      → Firebase setup
+ │   └── App.tsx
+ ├── screenshots/         → App screenshots and logo
+ ├── public/
+ └── README.md
+
+Authors
+Name	GitHub
+Rakshit Kumar	github.com/USERNAME
+Shreya Shinde
+github.com/USERNAME
+Future Enhancements
+
+Image uploads (Firebase Storage)
+
+Comments
+
+Notifications
+
+Theme switching
+
+Threads and replies
+
+Editable profile pages
+
+Contributions
+
+Contributions, suggestions, and improvements are welcome.
+Feel free to open an issue or submit a pull request.
